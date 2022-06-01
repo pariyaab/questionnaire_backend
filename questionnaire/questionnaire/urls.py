@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import TestView,ExplanationsView
+from .views import TestView,ExplanationsView,ExplanationlistView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',ExplanationsView.as_view(),name="test"),
+    path('',ExplanationlistView.as_view(),name="test"),
     path('api-auth/', include('rest_framework.urls'))
 ]
