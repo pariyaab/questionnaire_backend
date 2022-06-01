@@ -12,8 +12,8 @@ class Explanationlist(models.Model):
 
 
 class Explanationusers(models.Model):
-    explanation = models.ForeignKey('Explanations', models.DO_NOTHING)
-    user = models.ForeignKey('Users', models.DO_NOTHING)
+    explanation_id = models.ForeignKey('Explanations', models.DO_NOTHING)
+    user_id = models.ForeignKey('Users', models.DO_NOTHING)
     answer_id = models.IntegerField()
 
     class Meta:
@@ -41,6 +41,6 @@ class List(models.Model):
 class Users(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=True, null=True)
-
+    token = models.TextField()
     class Meta:
         db_table = 'users'
