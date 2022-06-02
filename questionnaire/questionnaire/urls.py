@@ -18,8 +18,8 @@ from django.urls import path,include
 from .views import ExplanationlistView,AddExplanationsAnswer,SignUpUsers
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/list',ExplanationlistView.as_view(),name="list"),
-    path('/add',AddExplanationsAnswer.as_view(),name="add"),
-    path('/signup',SignUpUsers.as_view(),name="signup"),
+    path('list',ExplanationlistView.as_view(),name="list"),
+    path('add',AddExplanationsAnswer.as_view(),name="add"),
+    path('signup',SignUpUsers.as_view(),name="signup"),
     path('api-auth/', include('rest_framework.urls'))
 ]

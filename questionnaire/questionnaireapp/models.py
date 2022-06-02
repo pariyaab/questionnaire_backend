@@ -12,8 +12,8 @@ class Explanationlist(models.Model):
 
 
 class Explanationusers(models.Model):
-    explanation_id = models.ForeignKey('Explanations', models.DO_NOTHING)
-    user_id = models.ForeignKey('Users', models.DO_NOTHING)
+    explanation = models.ForeignKey('Explanations', models.DO_NOTHING)
+    user = models.ForeignKey('Users', models.DO_NOTHING)
     answer_id = models.IntegerField()
 
     class Meta:

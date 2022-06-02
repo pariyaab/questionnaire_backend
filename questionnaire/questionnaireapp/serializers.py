@@ -22,9 +22,9 @@ class ListSerilizer(serializers.ModelSerializer):
 class UserSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('first_name','last_name','token')
+        fields = ('id','first_name','last_name','token')
 
 class ExplanationusersSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Explanationusers
-        fields = ('explanation_id','user_id','answer_id')
+        fields = ('explanation','user','answer_id')

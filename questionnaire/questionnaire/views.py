@@ -7,6 +7,8 @@ from questionnaireapp.models import Explanations,Explanationlist,List,Users
 import json
 import random
 import jwt
+from django.http.response import JsonResponse
+from rest_framework import status
 
 def checkToken(token):
       qs = Users.objects.filter(token=token)
@@ -79,10 +81,15 @@ class AddExplanationsAnswer(APIView):
             request.data._mutable = True
             qs = Users.objects.filter(token=token)
             user = UserSerilizer(qs, many=True)
-            request.data['user_id'] = user.data['id']
+            request.data['user'] = int(user.data[0]['id'])
+            print("this is user: ",request.data)
             serializer = ExplanationusersSerilizer(data=request.data)
             if(serializer.is_valid()):
                 serializer.save()
+                return Response({
+                'data': request.data,
+                'status': status.HTTP_200_OK
+                })
         else:
             return Response({'error': 'you dont have permission'})
             
