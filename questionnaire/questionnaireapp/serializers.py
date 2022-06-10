@@ -11,7 +11,7 @@ class ExplanationsSerilizer(serializers.ModelSerializer):
 class ExplanationlistSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Explanationlist
-        fields = ('id','explnataion','list','rank')
+        fields = ('id','explnataion','list','rank','is_answered')
 
 class ListSerilizer(serializers.ModelSerializer):
     class Meta:

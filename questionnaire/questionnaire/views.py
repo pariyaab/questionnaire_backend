@@ -26,9 +26,12 @@ class ExplanationsView(APIView):
 class ExplanationlistView(APIView):
     def get(self, request, *args, **kwargs):
         token = request.META['HTTP_AUTHORIZATION'].split('Bearer')[1].strip()
+        random_size = 50
         if(checkToken(token)):
-            items = list( Explanationlist.objects.all())
-            random_items = random.sample(items, 30)
+            items = list(Explanationlist.objects.filter(is_answered = 0))
+            if len(items) < 50:
+                random_size = len(items)
+            random_items = random.sample(items, random_size)
             explanation_list_serilizer = ExplanationlistSerilizer(random_items, many=True)
             explanations_text =[]
             list_text = []
@@ -82,7 +85,13 @@ class AddExplanationsAnswer(APIView):
             qs = Users.objects.filter(token=token)
             user = UserSerilizer(qs, many=True)
             request.data['user'] = int(user.data[0]['id'])
-            print("this is user: ",request.data)
+            # print("this is user: ",request.data)
+            print(request.data['explanation'] , request.data['list_id'])
+            object_to_be_update = list(Explanationlist.objects.filter(explnataion=request.data['explanation'] , list =request.data['list_id'] ))
+            for i in range(len(object_to_be_update)):
+                object_to_be_update[i].is_answered = 1
+            Explanationlist.objects.bulk_update(object_to_be_update, ["is_answered"])
+            print("done update")
             serializer = ExplanationusersSerilizer(data=request.data)
             if(serializer.is_valid()):
                 serializer.save()

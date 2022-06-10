@@ -5,7 +5,7 @@ class Explanationlist(models.Model):
     explnataion = models.ForeignKey('Explanations', models.DO_NOTHING)
     list = models.ForeignKey('List', models.DO_NOTHING)
     rank = models.IntegerField()
-
+    is_answered = models.IntegerField()
     class Meta:
         db_table = 'explanationList'
         unique_together = (('explnataion', 'list'),)

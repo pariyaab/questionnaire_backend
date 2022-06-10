@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-hh44hun9f13ob(9@e%ulahsggguqy%oid$w@jr-^-mg40qt$q4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=['*']
 
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,19 +38,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
-    'questionnaireapp'
+    'questionnaireapp',
+    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
+
+
 
 ROOT_URLCONF = 'questionnaire.urls'
 
@@ -70,6 +77,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'questionnaire.wsgi.application'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8080"
+]
 
 
 # Database
@@ -127,3 +140,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
