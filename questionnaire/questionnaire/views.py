@@ -85,13 +85,16 @@ class AddExplanationsAnswer(APIView):
             qs = Users.objects.filter(token=token)
             user = UserSerilizer(qs, many=True)
             request.data['user'] = int(user.data[0]['id'])
-            # print("this is user: ",request.data)
-            print(request.data['explanation'] , request.data['list_id'])
-            object_to_be_update = list(Explanationlist.objects.filter(explnataion=request.data['explanation'] , list =request.data['list_id'] ))
-            for i in range(len(object_to_be_update)):
-                object_to_be_update[i].is_answered = 1
-            Explanationlist.objects.bulk_update(object_to_be_update, ["is_answered"])
-            print("done update")
+
+            print("this is user: ",request.data)
+            if request.data['answer_id'] != '4' :
+                print(request.data['explanation'] , request.data['list_id'])
+                object_to_be_update = list(Explanationlist.objects.filter(explnataion=request.data['explanation'] , list =request.data['list_id'] ))
+                for i in range(len(object_to_be_update)):
+                    object_to_be_update[i].is_answered = 1
+                Explanationlist.objects.bulk_update(object_to_be_update, ["is_answered"])
+                print("done update")
+
             serializer = ExplanationusersSerilizer(data=request.data)
             if(serializer.is_valid()):
                 serializer.save()
